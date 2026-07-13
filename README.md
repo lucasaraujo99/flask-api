@@ -46,8 +46,20 @@ pip install -r requirements.txt
 pip freeze > requirements.txt
 ```
 
-
 ### Rodar
 ```
 python app.py
 ```
+
+## Estrutura do Projeto
+
+```
+flask-api/
+├── app_exemplo/
+├── app.py
+└── ...
+```
+
+app_exemplo/ → exemplo de aplicação web em python puro com front-end e back-end
+
+app.py → arquivo principal da aplicação (instancia e roda)
