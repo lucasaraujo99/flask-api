@@ -55,11 +55,23 @@ python app.py
 
 ```
 flask-api/
+├── app/
+|   ├── routes/
+|   |   └── main.py
+|   └── __init__.py
 ├── app_exemplo/
 ├── app.py
 └── ...
 ```
 
+anotacoes/ → material de consulta
+
+app/ → contém o código fonte da aplicação (instanciação, routes, etc)
+
+__init__.py → cria a aplicação (instanciação do app Flask e importação de rotas)
+
+routes/ → diretório de módulos de rotas (Blueprints)
+
 app_exemplo/ → exemplo de aplicação web em python puro com front-end e back-end
 
-app.py → arquivo principal da aplicação (instancia e roda)
+run.py → arquivo responsável por rodar a aplicação
