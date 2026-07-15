@@ -56,6 +56,7 @@ python app.py
 ```
 flask-api/
 ├── app/
+|   ├── models/
 |   ├── routes/
 |   |   └── main.py
 |   └── __init__.py
@@ -69,6 +70,8 @@ anotacoes/ → material de consulta
 app/ → contém o código fonte da aplicação (instanciação, routes, etc)
 
 __init__.py → cria a aplicação (instanciação do app Flask e importação de rotas)
+
+models/ → modelos de dados utilizando o Pydantic (organizando as definições e estruturas de dados da lógica de negócio)
 
 routes/ → diretório de módulos de rotas (Blueprints)
 
