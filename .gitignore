@@ -3,3 +3,6 @@
 
 # Cache Python
 __pycache__
+
+# Variáveis de ambiente
+.env

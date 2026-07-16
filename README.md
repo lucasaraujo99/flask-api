@@ -61,7 +61,9 @@ flask-api/
 |   |   └── main.py
 |   └── __init__.py
 ├── app_exemplo/
-├── app.py
+├── .env
+├── config.py
+├── run.py
 └── ...
 ```
 
@@ -76,5 +78,7 @@ models/ → modelos de dados utilizando o Pydantic (organizando as definições 
 routes/ → diretório de módulos de rotas (Blueprints)
 
 app_exemplo/ → exemplo de aplicação web em python puro com front-end e back-end
+
+.env → contém as variáveis de ambiente (URI)
 
 run.py → arquivo responsável por rodar a aplicação
