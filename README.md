@@ -46,6 +46,14 @@ pip install -r requirements.txt
 pip freeze > requirements.txt
 ```
 
+### .env
+
+.env é o arquivo de variáris de ambiente. Guarda dados como URI do MongoDB e SECRET_KEY de criptografia.
+
+Opções:
+1. Criar um arquivo .env baseado no arquivo .env.example
+2. Renomear .env.example para .env e alterar os valores das variáveis
+
 ### Rodar
 ```
 python app.py
@@ -79,6 +87,6 @@ routes/ → diretório de módulos de rotas (Blueprints)
 
 app_exemplo/ → exemplo de aplicação web em python puro com front-end e back-end
 
-.env → contém as variáveis de ambiente (URI)
+.env → contém as variáveis de ambiente (URI, SECRET_KEY, etc)
 
 run.py → arquivo responsável por rodar a aplicação

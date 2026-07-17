@@ -1,8 +1,16 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from app.models.user import LoginPayload
 from pydantic import ValidationError
+
+# Banco de Dados
 from app import db
 from bson import ObjectId
+from app.models.product import *
+
+# Autenticação
+from app.decorators import token_required
+from datetime import datetime, timedelta, timezone
+import jwt
 
 main_bp = Blueprint('main_bp', __name__)
 
@@ -16,32 +24,54 @@ def login():
     except ValidationError as e:
         return jsonify({"message": e.errors()}), 400
     except Exception as e:
-        jsonify({"message": "Erro durante a requisição."}), 500
-    """
+        return jsonify({"message": "Erro durante a requisição."}), 500
+    
     # simulando um login
     if user_data.username == 'admin' and user_data.password == '123':
-        return jsonify({"message": "Login bem-sucedido!"})
-    else:
-        return jsonify({"message": "Credenciais invalidas!"})
-    """
-    return jsonify({"message":f"Realizar o login do usuário {user_data.model_dump_json()}"})
+        token = jwt.encode(
+            {
+                "user_id": user_data.username,
+                "exp": datetime.now(timezone.utc) + timedelta(minutes=30)
+            },
+            current_app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
+        return jsonify({'access_token': token}), 200
+    
+    return jsonify({"message": "Credenciais invalidas!"})
+    
+    # return jsonify({"message":f"Realizar o login do usuário {user_data.model_dump_json()}"})
 
 # RF: O sistema deve permitir listagem de todos os produtos
 @main_bp.route('/products', methods=['GET'])
 def get_products():
     products_cursor = db.products.find({})
+
+    """
+    # lista de produtos com casting de id para string
     products_list = []
     for product in products_cursor:
         # casting do id para string, que originalmete é um ObjectId, que não é json serializable
         product['_id'] = str(product['_id']) 
         products_list.append(product)
+    """
+    # lista de produtos com casting de id para string (usando a classe criada ProductDBModel() e model_dump() modificado)
+    products_list = [ProductDBModel(**product).model_dump(by_alias=True, exclude_none=True) for product in products_cursor]
 
     return jsonify(products_list)
 
 # RF: O sistema deve permitir a criacao de um novo produto
 @main_bp.route('/products', methods=['POST'])
-def create_product():
-    return jsonify({"message":"Esta é a rota de criação de produto"})
+@token_required
+def create_product(token):
+    try:
+        product = Product(**request.get_json())
+    except ValidationError as e:
+        return jsonify({"error": e.errors()}), 400
+    
+    result = db.products.insert_one(product.model_dump())
+
+    return jsonify({"id": str(result.inserted_id), "message":"Produto criado com sucesso"}), 201
 
 # RF: O sistema deve permitir a visualizacao dos detalhes de um unico produto
 @main_bp.route('/product/<string:product_id>', methods=['GET'])
@@ -53,7 +83,8 @@ def get_product_by_id(product_id):
     product = db.products.find_one({'_id':oid})
 
     if product:
-        product['_id'] = str(product['_id'])
+        # product['_id'] = str(product['_id'])
+        product = ProductDBModel(**product).model_dump(by_alias=True, exclude_none=True)
         return jsonify(product)
     else:
         return jsonify({"error": f"Produto com o id: {product_id} - Não encontrado"})
