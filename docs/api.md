@@ -1,4 +1,32 @@
-# API Documentation
+# Flask API Documentation
+
+## Tecnologias
+
+- Flask
+- MongoDB
+- JWT
+- Pydantic
+
+## Autenticação
+
+A API utiliza autenticação JWT.
+
+Rotas protegidas exigem o header:
+
+Authorization: Bearer <jwt_token>
+
+## Endpoints
+
+| Método | Endpoint | Descrição |
+|---------|----------|-----------|
+| POST | /login | Autenticação |
+| GET | /products | Lista produtos |
+| POST | /products | Cria produto |
+| GET | /product/{id} | Busca produto |
+| PUT | /product/{id} | Atualiza produto |
+| DELETE | /product/{id} | Remove produto |
+| POST | /products/upload | Importa produtos |
+| POST | /sales/upload | Importa vendas |
 
 ## Base URL
 

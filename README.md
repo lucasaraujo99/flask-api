@@ -15,6 +15,19 @@ Projeto de API em Flask.
 - Retorno de rotas no formato **json** e **status http**
 - Criação de **http requests** com filters, sorting e pagination para testar as rotas criadas
 
+## Endpoints da API
+
+| Método | Endpoint | Descrição |
+|---------|----------|-----------|
+| POST | `/login` | Autenticação |
+| GET | `/products` | Lista produtos |
+| POST | `/products` | Cria um produto |
+| GET | `/product/{id}` | Busca um produto |
+| PUT | `/product/{id}` | Atualiza um produto |
+| DELETE | `/product/{id}` | Remove um produto |
+| POST | `/products/upload` | Importa produtos via CSV |
+| POST | `/sales/upload` | Importa vendas via CSV |
+
 ## Inicialização e Execução do Projeto
 
 ### Criar pasta venv
@@ -51,7 +64,7 @@ pip freeze > requirements.txt
 
 ### .env
 
-.env é o arquivo de variáris de ambiente. Guarda dados como URI do MongoDB e SECRET_KEY de criptografia.
+.env é o arquivo de variáveis de ambiente. Guarda dados como URI do MongoDB e SECRET_KEY de criptografia.
 
 Opções:
 1. Criar um arquivo .env baseado no arquivo .env.example
@@ -60,6 +73,14 @@ Opções:
 ### Rodar
 ```
 python app.py
+```
+
+## Documentação
+
+A documentação completa da API está disponível em:
+
+```
+docs/api.md
 ```
 
 ## Estrutura do Projeto
@@ -71,7 +92,9 @@ flask-api/
 |   ├── routes/
 |   |   └── main.py
 |   └── __init__.py
-├── app_exemplo/
+├── csv/
+├── docs/
+├── exemplos/
 ├── .env
 ├── config.py
 ├── run.py
@@ -82,13 +105,15 @@ anotacoes/ → material de consulta
 
 app/ → contém o código fonte da aplicação (instanciação, routes, etc)
 
-    `__init__.py` → cria a aplicação (instanciação do app Flask e importação de rotas)
+`__init__.py` → cria a aplicação (instanciação do app Flask e importação de rotas)
 
-    models/ → modelos de dados utilizando o Pydantic (organizando as definições e estruturas de dados da lógica de negócio)
+models/ → modelos de dados utilizando o Pydantic (organizando as definições e estruturas de dados da lógica de negócio)
 
-    routes/ → diretório de módulos de rotas (Blueprints)
+routes/ → diretório de módulos de rotas (Blueprints)
 
 csv/ → arquivos csv usados para inserção de vários itens no banco de dados com rotas de upload (upload_products, upload_sales)
+
+docs/ → documentação sobre rotas da api e como criar requisições http para essas rotas
 
 exemplos/ → exemplos de aplicação web (uma com python puro com front-end e back-end e outra em Flask básico)
 
