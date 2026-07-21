@@ -50,7 +50,17 @@ def login():
 # RF: O sistema deve permitir listagem de todos os produtos
 @main_bp.route('/products', methods=['GET'])
 def get_products():
-    products_cursor = db.products.find({})
+
+    query = QueryProduct(**request.args)
+
+    mongo_query = query.build_mongo_query()
+
+    # products_cursor = db.products.find({}) # todos os produtos
+    products_cursor = db.products.find(mongo_query)
+
+    products_cursor = query.apply_sort(products_cursor)
+
+    products_cursor = query.apply_pagination(products_cursor)
 
     """
     # lista de produtos com casting de id para string
@@ -124,6 +134,46 @@ def delete_product(token, product_id):
         return "", 204
     except Exception:
         return jsonify({"error": "id do produto inválido"}), 400
+    
+# RF: O sistema deve permitir a importacao de produtos através de um arquivo csv
+@main_bp.route('/products/upload', methods=['POST'])
+@token_required
+def upload_products(token):
+    if 'file' not in request.files:
+        return jsonify({"error": "Nenhum arquivo foi enviado"}), 400
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return jsonify({"error": "Nenhum arquivo selecionado"}), 400
+    
+    if file and file.filename.endswith('.csv'):
+        csv_stream = io.StringIO(file.stream.read().decode('UTF-8'), newline=None)
+        csv_reader = csv.DictReader(csv_stream)
+
+        products_to_insert = []
+        errors = []
+
+        for row_num, row in enumerate(csv_reader, 1):
+            try:
+                product_data = Product(**row)
+                products_to_insert.append(product_data.model_dump())
+            except ValidationError as e:
+                errors.append(f"Linha {row_num}: Dados inválidos - {e.errors()}")
+            except Exception as e:
+                errors.append(f"Linha {row_num}: Erro inesperado ao processar a linha - {str(e)}")            
+        
+        if products_to_insert:
+            try:
+                db.products.insert_many(products_to_insert)
+            except Exception as e:
+                return jsonify({"error": f"Erro ao inserir dados no banco: {str(e)}"}), 500
+        
+        return jsonify({
+            "message": "Upload processado com sucesso.",
+            "vendas_importadas": len(products_to_insert),
+            "erros_encontrados": errors
+        }), 200
 
 # RF: O sistema deve permitir a importacao de vendas através de um arquivo
 @main_bp.route('/sales/upload', methods=['POST'])

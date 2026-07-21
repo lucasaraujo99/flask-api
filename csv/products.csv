@@ -1,0 +1,51 @@
+name,brand,category,description,price,stock
+Notebook Gamer Pro X15,Dell,Notebook,Notebook gamer de alta performance,9499.99,50
+Notebook Inspiron 15,Dell,Notebook,Notebook para trabalho e estudos,4299.90,35
+Notebook Nitro V,Acer,Notebook,Notebook gamer intermediário,5899.90,40
+Notebook Aspire 5,Acer,Notebook,Notebook para uso diário,3599.90,55
+MacBook Air M3,Apple,Notebook,Notebook ultrafino da Apple,10999.90,20
+MacBook Pro M3,Apple,Notebook,Notebook profissional da Apple,15999.90,15
+IdeaPad Slim 5,Lenovo,Notebook,Notebook leve e compacto,4199.90,45
+ThinkPad E14,Lenovo,Notebook,Notebook corporativo,6499.90,25
+Galaxy Book4,Samsung,Notebook,Notebook Samsung para produtividade,4699.90,28
+ROG Zephyrus G14,Asus,Notebook,Notebook gamer premium,12499.90,18
+Mouse G502 Logitech,Logitech,Mouse,Mouse gamer com sensor HERO,399.90,120
+Mouse MX Master 3S,Logitech,Mouse,Mouse para produtividade,699.90,80
+Mouse Basilisk V3,Razer,Mouse,Mouse gamer RGB,459.90,65
+Mouse DeathAdder V3,Razer,Mouse,Mouse ergonômico gamer,529.90,60
+Mouse Pulsefire Haste,HyperX,Mouse,Mouse ultraleve gamer,329.90,70
+Teclado G Pro X,Logitech,Teclado,Teclado mecânico gamer,899.90,45
+Teclado MX Keys S,Logitech,Teclado,Teclado para produtividade,749.90,38
+Teclado Huntsman Mini,Razer,Teclado,Teclado óptico compacto,799.90,50
+Teclado Alloy Origins,HyperX,Teclado,Teclado mecânico RGB,649.90,55
+Teclado K95 RGB,Corsair,Teclado,Teclado gamer premium,1199.90,22
+Monitor UltraGear 27,LG,Monitor,Monitor gamer 144Hz,1899.90,30
+Monitor Odyssey G5,Samsung,Monitor,Monitor curvo gamer,2299.90,26
+Monitor ProArt PA278QV,Asus,Monitor,Monitor para edição de imagem,2799.90,18
+Monitor ThinkVision P24h,Lenovo,Monitor,Monitor corporativo QHD,1999.90,35
+Monitor UltraSharp U2723,Dell,Monitor,Monitor IPS profissional,3299.90,16
+SSD 1TB SN850X,Western Digital,Armazenamento,SSD NVMe Gen4,899.90,90
+SSD 2TB 990 Pro,Samsung,Armazenamento,SSD NVMe de alta velocidade,1399.90,70
+SSD 1TB KC3000,Kingston,Armazenamento,SSD NVMe PCIe 4.0,849.90,85
+HD Externo 2TB,Seagate,Armazenamento,HD portátil USB 3.0,499.90,60
+Pendrive 128GB,Kingston,Armazenamento,Pendrive USB 3.2,129.90,200
+Headset Cloud III,HyperX,Headset,Headset gamer com microfone,599.90,48
+Headset BlackShark V2,Razer,Headset,Headset gamer premium,749.90,35
+Headset G Pro X,Logitech,Headset,Headset para eSports,799.90,40
+Headset HS80 RGB,Corsair,Headset,Headset sem fio gamer,999.90,25
+Headset Pulse Elite,Sony,Headset,Headset para PlayStation,1199.90,18
+Webcam C920,Logitech,Webcam,Webcam Full HD,449.90,65
+Webcam Brio 4K,Logitech,Webcam,Webcam Ultra HD,999.90,28
+Webcam Kiyo Pro,Razer,Webcam,Webcam para streaming,1099.90,20
+Impressora EcoTank L4260,Epson,Impressora,Impressora multifuncional tanque de tinta,1699.90,25
+Impressora Laser M404dn,HP,Impressora,Impressora laser monocromática,2299.90,18
+Roteador Archer AX73,TP-Link,Rede,Roteador Wi-Fi 6,899.90,42
+Roteador RT-AX82U,Asus,Rede,Roteador gamer Wi-Fi 6,1599.90,20
+Switch SG108,TP-Link,Rede,Switch Gigabit 8 portas,199.90,75
+Placa de Vídeo RTX 5070,NVIDIA,Hardware,GPU para jogos em 1440p,4999.90,14
+Placa de Vídeo RX 9070 XT,AMD,Hardware,GPU para jogos e produtividade,4699.90,16
+Processador Ryzen 7 9800X,AMD,Hardware,CPU de alto desempenho,2899.90,24
+Processador Core Ultra 7,Intel,Hardware,CPU Intel de última geração,3099.90,22
+Memória Fury 32GB DDR5,Kingston,Hardware,Kit DDR5 6000MHz,999.90,60
+Fonte RM850x,Corsair,Hardware,Fonte 850W modular 80 Plus Gold,1099.90,30
+Gabinete H7 Flow,NZXT,Hardware,Gabinete Mid Tower com airflow,899.90,27

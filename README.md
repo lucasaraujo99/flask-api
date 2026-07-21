@@ -2,15 +2,18 @@
 
 Projeto de API em Flask.
 
+**Palavras-chave:** API, Flask, blueprints, JWT, decorators, MongoDB, Pydantic, json, http, filters, sorting e pagination
+
 ## Objetivos
 
-- Desenvolva APIs e aplicações web com Flask, estruturando rotas e integrando boas práticas de projeto.
-- Implemente autenticação segura com JWT, protegendo rotas e garantindo autorização adequada.
-- Integre o MongoDB à sua aplicação, realizando operações de leitura, escrita, atualização e exclusão de dados.
-- Valide e modele dados com Pydantic, garantindo consistência e segurança nas entradas da API.
-- Automatize a qualidade do código com pytest, criando testes unitários que aumentam a confiabilidade da aplicação.
-- Aplique práticas modernas de DevOps, utilizando Docker, Kubernetes e Redis para escalabilidade e performance.
-- Organize seus projetos com boas práticas de arquitetura, preparando aplicações Python para manutenção e evolução contínua.
+- Desenvolvimento de API com Flask
+- Organização das rotas atráves de **blueprints**
+- Implementação de autenticação com **JWT**, sem necessidade de guarda estado da seção (stateless)
+- Utilização de **decorators**, para implementar a necessidade de tokens de autenticação para usar as rotas
+- Integração com o MongoDB, realizando operações de leitura, escrita, atualização e exclusão de dados
+- Modelagem e validação de dados com **Pydantic**
+- Retorno de rotas no formato **json** e **status http**
+- Criação de **http requests** com filters, sorting e pagination para testar as rotas criadas
 
 ## Inicialização e Execução do Projeto
 
@@ -79,13 +82,15 @@ anotacoes/ → material de consulta
 
 app/ → contém o código fonte da aplicação (instanciação, routes, etc)
 
-__init__.py → cria a aplicação (instanciação do app Flask e importação de rotas)
+    `__init__.py` → cria a aplicação (instanciação do app Flask e importação de rotas)
 
-models/ → modelos de dados utilizando o Pydantic (organizando as definições e estruturas de dados da lógica de negócio)
+    models/ → modelos de dados utilizando o Pydantic (organizando as definições e estruturas de dados da lógica de negócio)
 
-routes/ → diretório de módulos de rotas (Blueprints)
+    routes/ → diretório de módulos de rotas (Blueprints)
 
-app_exemplo/ → exemplo de aplicação web em python puro com front-end e back-end
+csv/ → arquivos csv usados para inserção de vários itens no banco de dados com rotas de upload (upload_products, upload_sales)
+
+exemplos/ → exemplos de aplicação web (uma com python puro com front-end e back-end e outra em Flask básico)
 
 .env → contém as variáveis de ambiente (URI, SECRET_KEY, etc)
 

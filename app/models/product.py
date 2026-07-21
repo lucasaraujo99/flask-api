@@ -5,8 +5,10 @@ from bson import ObjectId
 class Product(BaseModel):
     id: Optional[ObjectId] = Field(None, alias='_id') #estamos dizendo: valor padrão = None; este atributo corresponde ao campo _id (dos objetos do mongo)
     name: str
-    price: float
+    brand: str
+    category: str
     description: Optional[str] = None
+    price: float
     stock: int
 
     model_config = ConfigDict(
@@ -32,8 +34,85 @@ class ProductDBModel(Product):
 class UpdateProduct(BaseModel):
 
     # atualização de dados 
-    
+
     name: Optional[str] = None
     price: Optional[float] = None
     description: Optional[str] = None
     stock: Optional[int] = None
+
+class QueryProduct(BaseModel):
+
+    # Validação de parâmetros da query
+    # Criação da query para o mongodb (filtros, paginação e ordenação)
+
+    # pages
+    page: Optional[int] = 1
+    limit: Optional[int] = 20
+    
+    # filters
+    category: Optional[str] = None
+    brand: Optional[str] = None
+    price_min: Optional[int] = None
+    price_max: Optional[int] = None
+    stock_min: Optional[int] = None
+
+    # search
+    search: Optional[str] = None
+
+    # sorting
+    sort: Optional[str] = None
+
+    def build_mongo_query(self):
+        query = {}
+
+        if self.category:
+            query["category"] = {
+                        "$regex": self.category,
+                        "$options": "i"
+                    }
+        if self.brand:
+            query["brand"] = {
+                        "$regex": self.brand,
+                        "$options": "i"
+                    }
+
+        if self.price_min or self.price_max:
+            query["price"] = {}
+
+            if self.price_min is not None:
+                query["price"]["$gte"] = self.price_min
+
+            if self.price_max is not None:
+                query["price"]["$lte"] = self.price_max
+
+        if self.stock_min:
+            query["stock"] = {"$gte": self.stock_min}
+        
+        if self.search:
+            query["$or"] = [
+                {
+                    "name": {
+                        "$regex": self.search,
+                        "$options": "i"
+                    }
+                },
+                {
+                    "description": {
+                        "$regex": self.search,
+                        "$options": "i"
+                    }
+                }
+            ]
+        return query
+
+    def apply_sort(self, products_cursor):
+        sorted_cursor = products_cursor
+        if self.sort == "price":
+            sorted_cursor = products_cursor.sort("price", 1)
+        elif self.sort == "-price":
+            sorted_cursor = products_cursor.sort("price", -1)
+        return sorted_cursor
+    
+    def apply_pagination(self, products_cursor):
+        paginated_cursor = products_cursor.skip((self.page - 1) * self.limit).limit(self.limit)
+        return paginated_cursor
